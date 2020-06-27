@@ -4,7 +4,7 @@
   "description": "markdown editor for vscode extension",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "parcel index.html"
   },
   "repository": {
     "type": "git",
@@ -18,6 +18,12 @@
   },
   "homepage": "https://github.com/jtaox/vsc-base-markdown#readme",
   "dependencies": {
-    "markdown-it": "^11.0.0"
+    "markdown-it": "^11.0.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  },
+  "devDependencies": {
+    "less": "^3.11.3",
+    "parcel-bundler": "^1.12.4"
   }
 }
