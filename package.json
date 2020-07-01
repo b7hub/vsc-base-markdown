@@ -1,0 +1,29 @@
+{
+  "name": "vsc-base-markdown",
+  "version": "1.0.0",
+  "description": "markdown editor for vscode extension",
+  "main": "index.js",
+  "scripts": {
+    "start": "parcel index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jtaox/vsc-base-markdown.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jtaox/vsc-base-markdown/issues"
+  },
+  "homepage": "https://github.com/jtaox/vsc-base-markdown#readme",
+  "dependencies": {
+    "markdown-it": "^11.0.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  },
+  "devDependencies": {
+    "less": "^3.11.3",
+    "parcel-bundler": "^1.12.4"
+  }
+}
