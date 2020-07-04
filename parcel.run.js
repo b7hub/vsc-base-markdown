@@ -26,14 +26,19 @@ const getOptions = ({ publicUrl = "/" }) => {
 const run = async (options) => {
   // 使用提供的入口文件路径和选项初始化 bundler
   const bundler = new Bundler(entryFiles, options);
-
-  // 运行 bundler，这将返回主 bundle
-  // 如果你正在使用监听模式，请使用下面这些事件，这是因为该 promise 只会触发一次，而不是每次重新构建时都触发
   const bundle = await bundler.bundle();
-  console.log(bundle)
+
+  return bundle;
 };
 
-module.exports = ({ extensionPath }) => {
+module.exports = async ({ extensionPath }) => {
   const options = getOptions({ publicUrl: extensionPath })
-  run(options)
+  const bundle = await run(options);
+
+  const entryAssetOptions = bundle.entryAsset.options;
+
+  return {
+    indexDir: entryAssetOptions.outDir
+  }
+
 }
