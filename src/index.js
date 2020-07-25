@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useLayoutEffect } from "react";
 import ReactDom from "react-dom";
 import Editor from "./components/Editor";
 import { instance as poster } from "./postMessage";
@@ -14,6 +14,10 @@ const App = () => {
 
   useEffect(() => {
     poster.subscribe("vscBaseMarkdown.setContent", setContent)
+  }, [])
+
+  useLayoutEffect(() => {
+    poster.subscribe("vscBaseMarkdown.mounted")
   }, [])
 
   return (
