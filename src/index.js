@@ -2,14 +2,18 @@ import React, { useEffect, useState, useLayoutEffect } from "react";
 import ReactDom from "react-dom";
 import Editor from "./components/Editor";
 import { instance as poster } from "./postMessage";
+import MarkdownIt  from "markdown-it"
 
 import "./index.less";
 
+const md = new MarkdownIt();
+
 const App = () => {
+
   const [text, setText] = useState("");
 
   const setContent = ({ payload = "" }) => {
-    setText(payload)
+    setText(md.render(payload))
   }
 
   useEffect(() => {
