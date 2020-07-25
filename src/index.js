@@ -17,7 +17,9 @@ const App = () => {
   }, [])
 
   useLayoutEffect(() => {
-    poster.subscribe("vscBaseMarkdown.mounted")
+    poster.post({
+      action: "vscBaseMarkdown.mounted"
+    })
   }, [])
 
   return (
