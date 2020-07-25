@@ -14,7 +14,7 @@ class Poster {
     window.addEventListener("message", (event) => {
       const message = event.data;
 
-      const subscriber = this.subscriberMap[message.command]
+      const subscriber = this.subscriberMap.get(message.command)
 
       if (!subscriber) return;
 
