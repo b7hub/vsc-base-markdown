@@ -8,8 +8,8 @@ import "./index.less";
 const App = () => {
   const [text, setText] = useState("");
 
-  const setContent = () => {
-    setText("hello")
+  const setContent = ({ payload = "" }) => {
+    setText(payload)
   }
 
   useEffect(() => {
