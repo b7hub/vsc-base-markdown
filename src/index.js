@@ -2,22 +2,20 @@ import React, { useEffect, useState, useLayoutEffect } from "react";
 import ReactDom from "react-dom";
 import Editor from "./components/Editor";
 import { instance as poster } from "./postMessage";
-import MarkdownIt  from "markdown-it"
 
 import "./index.less";
 
-const md = new MarkdownIt();
-
 const App = () => {
 
-  const [text, setText] = useState("");
+  const [initialValue, setInitialValue] = useState("");
 
   const setContent = ({ payload = "" }) => {
-    setText(md.render(payload))
+    setInitialValue(payload)
   }
 
   useEffect(() => {
     poster.subscribe("vscBaseMarkdown.setContent", setContent)
+  
   }, [])
 
   useLayoutEffect(() => {
@@ -26,9 +24,17 @@ const App = () => {
     })
   }, [])
 
+  const onChange = (value) => {
+    console.log("vscBaseMarkdown.onChange", value)
+    poster.post({
+      action: "vscBaseMarkdown.onChange",
+      value
+    })
+  }
+
   return (
     <div className="app">
-      <Editor value={text} />
+      <Editor initialValue={initialValue} onChange={onChange} />
     </div>
   );
 };

@@ -1,31 +1,39 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useMemo, useRef } from "react";
+import { Editor } from '@toast-ui/react-editor';
+
+import 'codemirror/lib/codemirror.css';
+import '@toast-ui/editor/dist/toastui-editor.css';
+
 import "./index.less";
 
-const Editor = ({ value, onChange }) => {
-  const [taValue, setTaValue] = useState(value);
+const MyEditor = ({ initialValue, onChange }) => {
+  const editorRef = useRef()
 
-  useEffect(() => {
-    setTaValue(value);
-  }, [value]);
-
-  const _onChange = (value) => {
-    if (onChange) {
-      onChange(value);
-    } else {
-      setTaValue(value);
+  const events = useMemo(() => {
+    return {
+      change: () => {
+        onChange(editorRef.current.editorInst.getMarkdown())
+      }
     }
-  };
+  }, [])
+
+  useEffect(() =>{
+    initialValue && editorRef.current.editorInst.setMarkdown(initialValue)
+  }, [initialValue])
 
   return (
     <div className="editor">
-      <textarea
-        placeholder="Enter something funny"
-        type="text"
-        value={taValue}
-        onChange={_onChange}
-      ></textarea>
+      <Editor
+        ref={editorRef}
+        previewStyle="vertical"
+        height="100%"
+        initialEditType="markdown"
+        useCommandShortcut={true}
+        usageStatistics={false}
+        events={events}
+      />
     </div>
   );
 };
 
-export default Editor;
+export default MyEditor;

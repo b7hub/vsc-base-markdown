@@ -1,4 +1,4 @@
-const vscode = acquireVsCodeApi();
+const vscode = typeof acquireVsCodeApi !== "undefined" && acquireVsCodeApi();
 
 class Poster {
   constructor() {
@@ -23,7 +23,7 @@ class Poster {
   }
 
   post(message = {}) {
-    vscode.postMessage({
+    vscode && vscode.postMessage({
       ...message,
       command: "vsc-base-markdown",
     });
